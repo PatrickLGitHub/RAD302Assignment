@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebAPIAuthenticationClient.PlayerProfile">
+    <Position X="4.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAACAAAABAAAAAAAAAAAEAAgA=</HashCode>
+      <FileName>GameObjectModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPIAuthenticationClient.GameObject">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>GameObjectModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPIAuthenticationClient.GameScoreObject">
+    <Position X="6.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjectModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPIAuthenticationClient.PlayerAuthentication">
+    <Position X="11.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAEAAAAAQAAAAAEAAAACAIAAAAAAAEAA=</HashCode>
+      <FileName>PlayerAuthentication.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPIAuthenticationClient.Token">
+    <Position X="8.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAAAgA=</HashCode>
+      <FileName>Token.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="WebAPIAuthenticationClient.AUTHSTATUS">
+    <Position X="1" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAABAAAAABAAAQAAA=</HashCode>
+      <FileName>PlayerAuthentication.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
