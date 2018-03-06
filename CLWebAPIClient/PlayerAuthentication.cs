@@ -26,8 +26,8 @@ namespace WebAPIAuthenticationClient
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     var response = client.GetAsync(baseWebAddress + "api/GameScores/getTops/Count/" + count.ToString() + "/Game/" + Game + "/").Result;
-                    var resultContent = response.Content.ReadAsAsync<List<GameScoreObject>>(
-                        new[] { new JsonMediaTypeFormatter() }).Result;
+                var resultContent = response.Content.ReadAsAsync<List<GameScoreObject>>(
+                    new[] { new JsonMediaTypeFormatter() }).Result;//
                     return resultContent;
                 }
             }
