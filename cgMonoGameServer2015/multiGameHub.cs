@@ -110,7 +110,7 @@ namespace MultiPlayerSignalRServer
                     lives = 3,
                      textureName = GameData.playerCharacters.Pop(),
                     position = new
-                        Vector2(GameData.r.Next((int)GameData.WorldBound.X),
+                        Point(GameData.r.Next((int)GameData.WorldBound.X),
                                 GameData.r.Next((int)GameData.WorldBound.Y)),
                     health = 100,
                     score = 0

@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNet.SignalR.Client;
+﻿using DataClasses;
+using Engine.Engines;
+using GameComponentNS;
+using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Rad302CameraClass;
+using Sprites;
+using System.Collections.Generic;
 
 namespace GameClient
 {
@@ -15,7 +21,14 @@ namespace GameClient
         HubConnection serverConnection;
         string connectionMessage = string.Empty;
         IHubProxy proxy;
+        Camera cam;
+        SpriteFont font;
+        Viewport v;
+        PlayerDataObject Player;
+        Texture2D Playerimage;
+        public static List<PlayerDataObject> totalPlayers = new List<PlayerDataObject>();
 
+        public string ID { get; private set; }
 
         public bool Connected { get; private set; }
         public Game1()
@@ -33,10 +46,15 @@ namespace GameClient
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            new InputEngine(this);
+            
+                //new Vector2(tileMap.GetLength(1) * tileWidth, tileMap.GetLength(0) * tileHeight));
             serverConnection = new HubConnection("https://rad302gameass.azurewebsites.net");
             serverConnection.StateChanged += ServerConnection_StateChanged;
             proxy = serverConnection.CreateHubProxy("GameHub");
             serverConnection.Start();
+cam = new Camera(Vector2.Zero,
+                new Vector2(v.Width, v.Height));
             base.Initialize();
         }
 
@@ -48,15 +66,14 @@ namespace GameClient
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Services.AddService<SpriteBatch>(spriteBatch);
+            Playerimage = Content.Load<Texture2D>("Player 1");
 
+            font = Content.Load<SpriteFont>("Message");
+            Services.AddService<SpriteFont>(font);
             // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        /// //
         private void ServerConnection_StateChanged(StateChange State)
         {
             switch (State.NewState)
@@ -79,28 +96,41 @@ namespace GameClient
             }
         }
 
-        //private void startGame()
-        //{
-        //    // Continue on and subscribe to the incoming messages joined, currentPlayers, otherMove messages
+        private void startGame()
+        {
+            // Continue on and subscribe to the incoming messages joined, currentPlayers, otherMove messages
 
-        //    // Immediate Pattern
-        //    proxy.Invoke<PlayerProfile>("Join")
-        //        .ContinueWith( // This is an inline delegate pattern that processes the message 
-        //                       // returned from the async Invoke Call
-        //                (p) => { // Wtih p do 
-        //                    if (p.Result == null)
-        //                        connectionMessage = "No player Data returned";
-        //                    else
-        //                    {
-        //                        CreatePlayer(p.Result);
-        //                        // Here we'll want to create our game player using the image name in the PlayerData 
-        //                        // Player Data packet to choose the image for the player
-        //                        // We'll use a simple sprite player for the purposes of demonstration 
-        //                    }
+            // Immediate Pattern
+            proxy.Invoke<PlayerDataObject>("Join")
+                .ContinueWith( // This is an inline delegate pattern that processes the message 
+                               // returned from the async Invoke Call
+                        (r) =>
+                        { // Wtih p do 
+                            if (r.Result == null)
+                                connectionMessage = "No player Data returned";
+                            else
+                            {
+                                CreatePlayer(r.Result);
+                                // Here we'll want to create our game player using the image name in the PlayerData 
+                                // Player Data packet to choose the image for the player
+                                // We'll use a simple sprite player for the purposes of demonstration 
+                            }
 
-        //                });
+                        });
 
-        //}
+        }
+        private void CreatePlayer(PlayerDataObject player)
+        {
+            //ID = player.GamerTag;
+            Player = player;
+            new SimplePlayerSprite(this, player, Content.Load<Texture2D>(player.textureName),
+                                    new Point(player.position.X, player.position.Y));
+
+            Playerimage = Content.Load<Texture2D>(player.textureName);
+            //new FadeText(this, Vector2.Zero, " Welcome " + player.GamerTag + " you are playing as " + player.textureName);
+            totalPlayers.Add(player);
+            //cam.follow(new Vector2((int)player.playerPosition.X, (int)player.playerPosition.Y), GraphicsDevice.Viewport);
+        }
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
@@ -128,9 +158,10 @@ namespace GameClient
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            spriteBatch.Begin();
+            spriteBatch.DrawString(font, connectionMessage, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             // TODO: Add your drawing code here
-
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

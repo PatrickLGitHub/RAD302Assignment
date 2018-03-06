@@ -53,7 +53,7 @@ namespace DataClasses
     [Serializable]
     public class PlayerDataObject : GameDataObject
     {
-        public Vector2 position;
+        public Point position;
         public int score;
         public int health;
         public int lives;
