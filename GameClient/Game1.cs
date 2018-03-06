@@ -56,7 +56,7 @@ namespace GameClient
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
         /// </summary>
-        /// 
+        /// //
         private void ServerConnection_StateChanged(StateChange State)
         {
             switch (State.NewState)
