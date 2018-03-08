@@ -53,6 +53,9 @@ namespace DataClasses
     [Serializable]
     public class PlayerDataObject : GameDataObject
     {
+        public string id;
+        public string GamerTag;
+        public int XP;
         public Point position;
         public int score;
         public int health;

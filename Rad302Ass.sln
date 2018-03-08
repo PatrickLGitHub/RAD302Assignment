@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLWebAPIClient", "CLWebAPIClient\CLWebAPIClient.csproj", "{177228DC-9378-45E5-9777-C6E8E18C250E}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cgMonoGameServer2015", "cgMonoGameServer2015\cgMonoGameServer2015.csproj", "{1AFD40C2-F48D-41A0-B140-B03F62FC5B8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClasses", "DataClasses\DataClasses.csproj", "{7F669265-A6D5-474B-A54A-26E55155D8C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gameServer", "gameServer\gameServer.csproj", "{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,14 @@ Global
 		{7F669265-A6D5-474B-A54A-26E55155D8C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F669265-A6D5-474B-A54A-26E55155D8C6}.Release|x86.ActiveCfg = Release|Any CPU
 		{7F669265-A6D5-474B-A54A-26E55155D8C6}.Release|x86.Build.0 = Release|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Debug|x86.Build.0 = Debug|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{9989A4DC-8EA9-4FA0-9E89-670437C0C3C4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

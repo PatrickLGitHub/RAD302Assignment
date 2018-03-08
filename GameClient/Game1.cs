@@ -47,14 +47,14 @@ namespace GameClient
         {
             // TODO: Add your initialization logic here
             new InputEngine(this);
-            
-                //new Vector2(tileMap.GetLength(1) * tileWidth, tileMap.GetLength(0) * tileHeight));
-            serverConnection = new HubConnection("https://rad302gameass.azurewebsites.net");
+
+            //new Vector2(tileMap.GetLength(1) * tileWidth, tileMap.GetLength(0) * tileHeight));
+            //serverConnection = new HubConnection("https://rad302gameass.azurewebsites.net");
+            serverConnection = new HubConnection("http://localhost:55712/");
             serverConnection.StateChanged += ServerConnection_StateChanged;
             proxy = serverConnection.CreateHubProxy("GameHub");
             serverConnection.Start();
-cam = new Camera(Vector2.Zero,
-                new Vector2(v.Width, v.Height));
+            cam = new Camera(Vector2.Zero, new Vector2(v.Width, v.Height));
             base.Initialize();
         }
 
@@ -159,6 +159,13 @@ cam = new Camera(Vector2.Zero,
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+
+            //spriteBatch.Draw(Playerimage, new Rectangle(Player.position.X,
+            //              Player.position.Y,
+            //              Playerimage.Width,
+            //              Playerimage.Height),
+            //                Color.White);
+
             spriteBatch.DrawString(font, connectionMessage, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             // TODO: Add your drawing code here
             spriteBatch.End();
