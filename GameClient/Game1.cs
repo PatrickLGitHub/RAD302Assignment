@@ -24,9 +24,12 @@ namespace GameClient
         Camera cam;
         SpriteFont font;
         Viewport v;
-        PlayerDataObject Player;
+        PlayerDataObject PlayerInfo;
         Texture2D Playerimage;
-        public static List<PlayerDataObject> totalPlayers = new List<PlayerDataObject>();
+        SimplePlayerSprite player;
+        Texture2D Background;
+        Rectangle mainFrame;
+        public static List<SimplePlayerSprite> totalPlayers = new List<SimplePlayerSprite>();
 
         public string ID { get; private set; }
 
@@ -49,12 +52,16 @@ namespace GameClient
             new InputEngine(this);
 
             //new Vector2(tileMap.GetLength(1) * tileWidth, tileMap.GetLength(0) * tileHeight));
-            //serverConnection = new HubConnection("https://rad302gameass.azurewebsites.net");
-            serverConnection = new HubConnection("http://localhost:55712/");
+            serverConnection = new HubConnection("https://rad302gameass.azurewebsites.net");
+            //serverConnection = new HubConnection("http://localhost:55712/");
             serverConnection.StateChanged += ServerConnection_StateChanged;
             proxy = serverConnection.CreateHubProxy("GameHub");
             serverConnection.Start();
             cam = new Camera(Vector2.Zero, new Vector2(v.Width, v.Height));
+            Playerimage = Content.Load<Texture2D>("Player 1");
+            player = new SimplePlayerSprite(this,  PlayerInfo, Playerimage,
+                                    new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
+            totalPlayers.Add(player);
             base.Initialize();
         }
 
@@ -67,7 +74,9 @@ namespace GameClient
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService<SpriteBatch>(spriteBatch);
-            Playerimage = Content.Load<Texture2D>("Player 1");
+            Background = Content.Load<Texture2D>("Background");
+            mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            
 
             font = Content.Load<SpriteFont>("Message");
             Services.AddService<SpriteFont>(font);
@@ -119,16 +128,17 @@ namespace GameClient
                         });
 
         }
+
         private void CreatePlayer(PlayerDataObject player)
         {
             //ID = player.GamerTag;
-            Player = player;
-            new SimplePlayerSprite(this, player, Content.Load<Texture2D>(player.textureName),
-                                    new Point(player.position.X, player.position.Y));
+            PlayerInfo = player;
+            //new SimplePlayerSprite(this, player, Playerimage,
+            //                        new Point(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2));
 
-            Playerimage = Content.Load<Texture2D>(player.textureName);
+            //Playerimage = Content.Load<Texture2D>(player.textureName);
             //new FadeText(this, Vector2.Zero, " Welcome " + player.GamerTag + " you are playing as " + player.textureName);
-            totalPlayers.Add(player);
+            //totalPlayers.Add(player);
             //cam.follow(new Vector2((int)player.playerPosition.X, (int)player.playerPosition.Y), GraphicsDevice.Viewport);
         }
         protected override void UnloadContent()
@@ -151,6 +161,7 @@ namespace GameClient
             base.Update(gameTime);
         }
 
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -165,7 +176,8 @@ namespace GameClient
             //              Playerimage.Width,
             //              Playerimage.Height),
             //                Color.White);
-
+            spriteBatch.Draw(Background, mainFrame, Color.White);
+            //spriteBatch.Draw(Playerimage, new Vector2(450, 240), Color.White);
             spriteBatch.DrawString(font, connectionMessage, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             // TODO: Add your drawing code here
             spriteBatch.End();
